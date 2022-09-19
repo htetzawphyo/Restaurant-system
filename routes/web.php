@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DishesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false,
+    'verify' => false,
+    'confirm' => false
+]);
+
+Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');
+
+Route::resource('/dish', DishesController::class);
